@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Budget App</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}"/>
+    <!-- Font Awesome Icons -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'finance/base.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- Top NavBar -->
+<nav id="scanfcode" class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" id="toogle-button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </button>
+            <a id="logo" class="navbar-brand" href="/home">FinCander</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+
+            <ul id="link" class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="first-link">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Further Extension 1</a></li>
+                        <li><a href="#">Further Extension 2</a></li>
+                    </ul>
+                </li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url 'fincander' %}">Budgeting</a></li>
+                <li><a href='#'>Profile</a></li>
+                <li id="button-link1"><a href="{% url 'logout' %}">Sign Out</a></li>
+                {% else %}
+                <li id="button-link2"><a href="{% url 'login' %}">Sign In</a></li>
+                <li id="button-link3"><a href="{% url 'register' %}">Sign Up</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="wrapper">
+    <div class="container">
+        <div class="sub-container-home">
+            <!-- Income -->
+            <div class="home-container">
+                <h2><b>Experience a life free of financial stress and transform your relationship to money with this
+                    indispensable FinCander App!</b></h2>
+            </div>
+
+            <!-- Expense -->
+            <div class="home-container">
+                <img src="{% static 'images/show_app_2.png' %}" alt="app">
+
+            </div>
+        </div>
+        <div class="home-container-horizontal">
+            <h3><a href="{% url 'register' %}">Start with FinCander!</a></h3>
+
+        </div>
+
+        <div class="home-container-horizontal">
+            <h3><a href="{% url 'login' %}">Log in to FinCander!</a></h3>
+        </div>
+        <div class="home-container-banner">
+            <img src="{% static 'images/main_page_banner.png' %}" alt="banner" class="responsive">
+            <div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
