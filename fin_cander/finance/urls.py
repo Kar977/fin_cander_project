@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import FinanceView
+from finance.views.income.crud import FinanceView
 
 
 urlpatterns = [

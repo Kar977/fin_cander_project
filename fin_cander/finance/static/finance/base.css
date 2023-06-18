@@ -27,7 +27,7 @@ body {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2em;
+  gap: 1em;
   align-items: center;
 }
 .sub-list-container {
@@ -277,5 +277,9 @@ body {
 .responsive {
   width: 90%;
   max-width: 70.75em;
+}
+.img-fluid {
+    width: 100%;
+    height: auto;
 }
 }
