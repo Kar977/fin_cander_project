@@ -1,0 +1,192 @@
+{% load widget_tweaks %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Budget App</title>
+    <link rel="icon" href="{% static 'images/favicon.ico' %}"/>
+    <!-- Font Awesome Icons -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'finance/base.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Amchart -->
+    <script src="//cdn.amcharts.com/lib/4/core.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
+    <script src="//cdn.amcharts.com/lib/4/maps.js"></script>
+
+    <script src="{% static 'finance/chart.js'%}"></script>
+
+</head>
+<body>
+<!-- Top NavBar -->
+<nav id="scanfcode" class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" id="toogle-button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </button>
+            <a id="logo" class="navbar-brand" href="/home">FinCander</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+
+            <ul id="link" class="nav navbar-nav navbar-right">
+                <li class="dropdown" id="month-link">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Month <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">January</a></li>
+                        <li><a href="#">February</a></li>
+                        <li><a href="#">March</a></li>
+                        <li><a href="#">April</a></li>
+                        <li><a href="#">May</a></li>
+                        <li><a href="#">June</a></li>
+                        <li><a href="#">July</a></li>
+                        <li><a href="#">August</a></li>
+                        <li><a href="#">September</a></li>
+                        <li><a href="#">October</a></li>
+                        <li><a href="#">November</a></li>
+                        <li><a href="#">December</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" id="year-link">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Year <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">2023</a></li>
+                        <li><a href="#">2024</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown" id="first-link">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Further Extension 1</a></li>
+                        <li><a href="#">Further Extension 2</a></li>
+                    </ul>
+                </li>
+                <li><a href='#'>Profile</a></li>
+                <li id="button-link"><a href="{% url 'logout' %}">Sign Out</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="wrapper">
+    <div class="container">
+        <div class="sub-container">
+
+            <!-- Income -->
+            <form method="POST">
+                {% csrf_token %}
+                <div class="income-input-container">
+                    <h3>Income</h3>
+                    {% render_field income_form.title_income class="income-input-container" %}
+                    {% render_field income_form.amount_income class="income-input-container" placeholder="Amount"%}
+                    {% render_field income_form.date_income class="income-input-container" placeholder="Date"%}
+                    <button class="submit" id="income-input-button" type="submit" name="income_btn">Add Income</button>
+                </div>
+            </form>
+
+
+            <!-- Plan -->
+            <form method="POST">
+                {% csrf_token %}
+                <div class="plan-input-container">
+                <h3>Plan</h3>
+                    {% render_field plan_form.category_plan class="select-category" %}
+                    {% render_field plan_form.amount_plan class="plan-input-container" placeholder="Amount" %}
+
+
+
+                <button class="plan-submit" id="plan-input-button" name="plan_btn">Add Plan</button>
+            </div>
+            </form>
+
+            <!-- Expense -->
+            <div class="expense-input-container">
+                <h3>Expense</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    {% render_field expense_form.category_plan class="select-category" %}
+                    {% render_field expense_form.amount_expense class="expense-input-container" placeholder="Amount" %}
+                    {% render_field expense_form.date_expense class="expense-input-container" placeholder="Date" %}
+
+
+                <button class="submit" id="check-amount" name="expense_btn">Add Expense</button>
+                </form>
+            </div>
+        </div>
+        <!-- Output -->
+        <div class="output-container flex-space">
+            <div>
+                <p>Total Income</p>
+                <span id="income-value">0</span>
+            </div>
+            <div>
+                <p>Total Plan</p>
+                <span id="plan-value">0</span>
+            </div>
+            <div>
+                <p>Total Expenses</p>
+                <span id="expense-value">0</span>
+            </div>
+            <div>
+                <p>Execution</p>
+                <span id="execution-value">0</span>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper">
+    <!-- Chart Summary -->
+    <div class="list">
+        <h3>Summary Chart</h3>
+        <div class="chart-space" id="chart"></div>
+    </div>
+</div>
+
+
+<div class="wrapper">
+    <!-- List Container - Flex space for lists -->
+    <div class="container flex-space-for-history-list">
+        <!-- List Income -->
+        <div class="history-list">
+            <h3>Income List</h3>
+            <div class="list-container" id="income-list">
+                Some random text to check overflow-wrap: dsadsdasdfffffffffffffffffffffffffffffffffffffffff
+                fffffffffffffffffffffffffffffffffffffffffffffffff
+                fddddddddddddddddddddddddddddddddddddddddddddddd
+                sssssssssssssssssssssssssssssssssssssssssssssss
+            </div>
+        </div>
+
+        <!-- List Plan -->
+        <div class="history-list">
+            <h3>Plan List</h3>
+            <div class="list-container" id="plan-list">
+                1. Main salary $1250 2023-06-06<p class="right-align">(Edit/Delete)</p>
+            </div>
+        </div>
+
+        <!-- List Expense -->
+        <div class="history-list">
+            <h3>Expense List</h3>
+            <div class="list-container" id="expense-list"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
