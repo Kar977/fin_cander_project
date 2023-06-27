@@ -54,7 +54,40 @@ class CreateIncomePlanExecute(View):
 			return HttpResponse("Nothing")
 
 
+class CreateIncomePlanExecuteFirstView(View):
+	template_name = "finance/budgeting_start.html"
 
+	def get(self, request, year, month, *args, **kwargs):
+
+		income_form = IncomeForm(request.POST)
+		plan_form = PlanForm(request.POST)
+		expense_form = ExpenseForm(request.POST)
+		last_year = year
+		last_month = month
+		print("Year = ", year)
+		print("Month =", month)
+		return render(request, self.template_name, {"income_form": income_form,
+													"plan_form": plan_form,
+													"expense_form": expense_form,
+													"last_year": last_year,
+													"last_month": last_month})
+
+	def post(self, request, *args, **kwargs):
+		income_form = IncomeForm(request.POST)
+		plan_form = PlanForm(request.POST)
+		expense_form = ExpenseForm(request.POST)
+
+		if "income_btn" in request.POST:
+			income_form.save()
+			return HttpResponse("INCOME ADDED")
+		elif "plan_btn" in request.POST:
+			plan_form.save()
+			return HttpResponse("PLAN ADDED")
+		elif "expense_btn" in request.POST:
+			expense_form.save()
+			return HttpResponse("EXPENSE ADDED")
+		else:
+			return HttpResponse("Nothing")
 
 
 

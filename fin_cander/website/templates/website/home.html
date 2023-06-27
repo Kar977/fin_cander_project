@@ -49,6 +49,7 @@
                 {% else %}
                 <li id="button-link2"><a href="{% url 'login' %}">Sign In</a></li>
                 <li id="button-link3"><a href="{% url 'register' %}">Sign Up</a></li>
+                <li id="button-link4"><a href="{% url 'budgeting_first_view' year=current_year month=current_month %}">DateBudget</a></li>
                 {% endif %}
 
             </ul>
