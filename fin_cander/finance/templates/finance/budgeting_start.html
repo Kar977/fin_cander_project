@@ -17,25 +17,25 @@
                 <li class="dropdown" id="month-link">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Month <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">January</a></li>
-                        <li><a href="#">February</a></li>
-                        <li><a href="#">March</a></li>
-                        <li><a href="#">April</a></li>
-                        <li><a href="#">May</a></li>
-                        <li><a href="#">June</a></li>
-                        <li><a href="#">July</a></li>
-                        <li><a href="#">August</a></li>
-                        <li><a href="#">September</a></li>
-                        <li><a href="#">October</a></li>
-                        <li><a href="#">November</a></li>
-                        <li><a href="#">December</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=1 %}">January</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=2 %}">February</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=3 %}">March</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=4 %}">April</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=5 %}">May</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=6 %}">June</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=7 %}">July</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=8 %}">August</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=9 %}">September</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=10 %}">October</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=11 %}">November</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=last_year month=12 %}">December</a></li>
                     </ul>
                 </li>
                 <li class="dropdown" id="year-link">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Year <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">2023</a></li>
-                        <li><a href="#">2024</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=2023 month=last_month %}">2023</a></li>
+                        <li><a href="{% url 'budgeting_first_view' year=2024 month=last_month %}">2024</a></li>
                     </ul>
                 </li>
                 <li class="dropdown" id="first-link">
@@ -159,4 +159,3 @@
     </div>
 </div>
 {% endblock content %}
-
