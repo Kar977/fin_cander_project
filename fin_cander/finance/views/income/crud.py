@@ -59,25 +59,28 @@ class CreateIncomePlanExecuteFirstView(View):
 
 	def get(self, request, year, month, *args, **kwargs):
 
-		income_form = IncomeForm(request.POST)
+		income_form = IncomeForm(year, month, request.POST)
 		plan_form = PlanForm(request.POST)
 		expense_form = ExpenseForm(request.POST)
 		last_year = year
 		last_month = month
 		print("Year = ", year)
 		print("Month =", month)
+		# tu musialbym wsadzic logike, żeby poprawnie odczytywalo dane z DB i przekazywalo do context managera i
+		# potem użyć w odpowiednim miejscu w HTML'u
 		return render(request, self.template_name, {"income_form": income_form,
 													"plan_form": plan_form,
 													"expense_form": expense_form,
 													"last_year": last_year,
 													"last_month": last_month})
 
-	def post(self, request, *args, **kwargs):
+	def post(self, request, year, month, *args, **kwargs):
 		income_form = IncomeForm(request.POST)
 		plan_form = PlanForm(request.POST)
 		expense_form = ExpenseForm(request.POST)
 
 		if "income_btn" in request.POST:
+			income
 			income_form.save()
 			return HttpResponse("INCOME ADDED")
 		elif "plan_btn" in request.POST:
