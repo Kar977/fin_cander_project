@@ -20,13 +20,13 @@ CATEGORY_CHOICES = (
 
 
 class PeriodTime(models.Model):
-	year = models.DateField(default=timezone.now())
-	month = models.DateField(default=timezone.now())
+	year = models.IntegerField(default=timezone.now().year)
+	month = models.IntegerField(default=timezone.now().month)
 
 
 class Income(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
-	date_period = models.ForeignKey(PeriodTime, on_delete=models.CASCADE, default=timezone.now())
+	date_period = models.ForeignKey(PeriodTime, on_delete=models.CASCADE)
 	title_income = models.CharField(max_length=30)
 	amount_income = models.FloatField(validators=[MinValueValidator(1.0), MaxValueValidator(1000000.0)])
 	date_income = models.DateField(default=timezone.now())
