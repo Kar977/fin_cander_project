@@ -1,5 +1,6 @@
 from django import forms
 from . import models
+import calendar
 
 
 CATEGORY_CHOICES = [
@@ -27,10 +28,11 @@ class IncomeForm(forms.ModelForm):
 	def __init__(self, current_year, current_month, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 
-		min_date = f"{current_year}-0{current_month}-01"
-		max_date = f"{current_year}-0{current_month}-20"
-		print("max", max_date)
-		print("min", min_date)
+		if current_month < 10:
+			current_month = f"0{current_month}"
+
+		min_date = f"{current_year}-{current_month}-01"
+		max_date = f"{current_year}-{current_month}-{calendar.monthrange(current_year, int(current_month))[1]}"
 
 		self.fields["date_income"].widget.attrs.update({"min": min_date, "max": max_date})
 
@@ -50,6 +52,17 @@ class PlanForm(forms.ModelForm):
 
 class ExpenseForm(forms.ModelForm):
 	category_plan = forms.ChoiceField(choices=CATEGORY_CHOICES)
+
+	def __init__(self, current_year, current_month, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
+		if current_month < 10:
+			current_month = f"0{current_month}"
+
+		min_date = f"{current_year}-{current_month}-01"
+		max_date = f"{current_year}-{current_month}-{calendar.monthrange(current_year, int(current_month))[1]}"
+
+		self.fields["date_expense"].widget.attrs.update({"min": min_date, "max": max_date})
 
 	class Meta:
 		model = models.Expense

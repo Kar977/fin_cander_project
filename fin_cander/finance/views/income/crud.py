@@ -61,7 +61,7 @@ class CreateIncomePlanExecuteFirstView(View):
 
 		income_form = IncomeForm(year, month, request.POST)
 		plan_form = PlanForm(request.POST)
-		expense_form = ExpenseForm(request.POST)
+		expense_form = ExpenseForm(year, month, request.POST)
 		last_year = year
 		last_month = month
 		print("Year = ", year)
@@ -80,7 +80,6 @@ class CreateIncomePlanExecuteFirstView(View):
 		expense_form = ExpenseForm(request.POST)
 
 		if "income_btn" in request.POST:
-			income
 			income_form.save()
 			return HttpResponse("INCOME ADDED")
 		elif "plan_btn" in request.POST:
@@ -91,29 +90,3 @@ class CreateIncomePlanExecuteFirstView(View):
 			return HttpResponse("EXPENSE ADDED")
 		else:
 			return HttpResponse("Nothing")
-
-
-
-
-"""
-	def post(self, request, *args, **kwargs):
-		if request.POST.get("income_btn") == "income_btn":
-			return redirect("home_site")
-		elif request.POST.get("form_type") == "plan_form":
-			return redirect("home_site")
-		elif request.POST.get("form_type") == "expense_form":
-			return redirect("home_site")
-		else:
-			return HttpResponse("NIC")
-
-"""
-
-
-
-
-
-"""class BudgetListView(ListView):
-	model = Income
-	template_name = "finance/create_income.html"
-	context_object_name = "incomes"
-"""
