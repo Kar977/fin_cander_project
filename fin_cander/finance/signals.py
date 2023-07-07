@@ -4,16 +4,13 @@ from .models import PeriodTime, Income, Plan, Expense
 
 
 @receiver(pre_save, sender=Income)
-@receiver(pre_save, sender=Plan)
-@receiver(pre_save, sender=Expense)
-def create_period_time(sender, instance, created, **kwargs):
-	if not created:
-		PeriodTime.objects.create(sender=instance)
+def create_period_time(sender, instance, **kwargs):
+	# print("DUPA1", sender., flush=True)
+	# period_time = PeriodTime.objects.create(year=year, month=month) # TODO get_or_create
+	# sender.date_period = period_time
+	pass
 
-
-@receiver(pre_save, sender=Income)
-@receiver(pre_save, signal=Plan)
-@receiver(pre_save, signal=Expense)
-def save_period_time(sender, instance, **kwargs):
-	instance.periodtime.save()
+# @receiver(pre_save, sender=Income)
+# def save_period_time(sender, instance, **kwargs):
+# 	instance.periodtime.save()
 

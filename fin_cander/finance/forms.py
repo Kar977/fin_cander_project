@@ -27,6 +27,8 @@ class IncomeForm(forms.ModelForm):
 
 	def __init__(self, current_year, current_month, *args, **kwargs):
 		super().__init__(*args, **kwargs)
+		print("cur_year", current_year)
+		print("cur_month", current_month)
 
 		if current_month < 10:
 			current_month = f"0{current_month}"
