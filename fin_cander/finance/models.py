@@ -31,6 +31,11 @@ class Income(models.Model):
 	amount_income = models.FloatField(validators=[MinValueValidator(1.0), MaxValueValidator(1000000.0)])
 	date_income = models.DateField(default=timezone.now())
 
+	def save(self):
+		# TODO implement logic for filling out the date_period field
+
+		pass
+
 
 class Plan(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)

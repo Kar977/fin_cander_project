@@ -42,7 +42,8 @@ class CreateIncomePlanExecute(View):
 		expense_form = ExpenseForm(request.POST)
 
 		if "income_btn" in request.POST:
-			income_form.save()
+			if income_form.is_valid():
+				income_form.save()
 			return HttpResponse("INCOME ADDED")
 		elif "plan_btn" in request.POST:
 			plan_form.save()
@@ -57,13 +58,11 @@ class CreateIncomePlanExecute(View):
 class CreateIncomePlanExecuteFirstView(View):
 	template_name = "finance/budgeting_start.html"
 
-	def get(self, request, year, month, *args, **kwargs):
-
-		income_form = IncomeForm(year, month, request.POST)
+	def get(self, request, year, month):
+		income_form = IncomeForm(current_year=year, current_month=month)
 		plan_form = PlanForm(request.POST)
-		expense_form = ExpenseForm(request.POST)
-		last_year = year
-		last_month = month
+		expense_form = ExpenseForm(current_year=year, current_month=month)
+
 		print("Year = ", year)
 		print("Month =", month)
 		# tu musialbym wsadzic logike, żeby poprawnie odczytywalo dane z DB i przekazywalo do context managera i
@@ -71,16 +70,15 @@ class CreateIncomePlanExecuteFirstView(View):
 		return render(request, self.template_name, {"income_form": income_form,
 													"plan_form": plan_form,
 													"expense_form": expense_form,
-													"last_year": last_year,
-													"last_month": last_month})
+													"last_year": year,
+													"last_month": month})
 
 	def post(self, request, year, month, *args, **kwargs):
-		income_form = IncomeForm(request.POST)
-		plan_form = PlanForm(request.POST)
-		expense_form = ExpenseForm(request.POST)
+		income_form = IncomeForm(year, month, request.POST)
+		plan_form = PlanForm()
+		expense_form = ExpenseForm(year, month, request.POST)
 
 		if "income_btn" in request.POST:
-			income
 			income_form.save()
 			return HttpResponse("INCOME ADDED")
 		elif "plan_btn" in request.POST:
@@ -91,29 +89,3 @@ class CreateIncomePlanExecuteFirstView(View):
 			return HttpResponse("EXPENSE ADDED")
 		else:
 			return HttpResponse("Nothing")
-
-
-
-
-"""
-	def post(self, request, *args, **kwargs):
-		if request.POST.get("income_btn") == "income_btn":
-			return redirect("home_site")
-		elif request.POST.get("form_type") == "plan_form":
-			return redirect("home_site")
-		elif request.POST.get("form_type") == "expense_form":
-			return redirect("home_site")
-		else:
-			return HttpResponse("NIC")
-
-"""
-
-
-
-
-
-"""class BudgetListView(ListView):
-	model = Income
-	template_name = "finance/create_income.html"
-	context_object_name = "incomes"
-"""
