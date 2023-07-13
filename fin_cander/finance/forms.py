@@ -1,7 +1,7 @@
 from django import forms
 from . import models
 import calendar
-
+from django.contrib.auth.models import  User
 
 CATEGORY_CHOICES = [
 	("", "Select a category"),
@@ -40,6 +40,7 @@ class IncomeForm(forms.ModelForm):
 
 	class Meta:
 		model = models.Income
+		exclude = ["user"]
 		fields = ["title_income", "amount_income", "date_income"]
 		widgets = {"date_income": DateInput()}
 
@@ -47,8 +48,12 @@ class IncomeForm(forms.ModelForm):
 class PlanForm(forms.ModelForm):
 	category_plan = forms.ChoiceField(choices=CATEGORY_CHOICES)
 
+	def __init__(self, current_year, current_month, *args, **kwargs):
+		super().__init__(*args, **kwargs)
+
 	class Meta:
 		model = models.Plan
+		exclude = ["user", "date_plan"]
 		fields = ["category_plan", "amount_plan"]
 
 
