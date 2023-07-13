@@ -5,6 +5,10 @@ from django.contrib import messages
 from django.views.generic.list import ListView
 from django.views import View
 from finance.models import Income
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from datetime import datetime
 
 
 # Create your views here.
@@ -55,12 +59,12 @@ class CreateIncomePlanExecute(View):
 			return HttpResponse("Nothing")
 
 
-class CreateIncomePlanExecuteFirstView(View):
+class CreateIncomePlanExecuteFirstView(LoginRequiredMixin, View):
 	template_name = "finance/budgeting_start.html"
 
 	def get(self, request, year, month):
 		income_form = IncomeForm(current_year=year, current_month=month)
-		plan_form = PlanForm(request.POST)
+		plan_form = PlanForm(current_year=year, current_month=month)
 		expense_form = ExpenseForm(current_year=year, current_month=month)
 
 		print("Year = ", year)
@@ -74,18 +78,27 @@ class CreateIncomePlanExecuteFirstView(View):
 													"last_month": month})
 
 	def post(self, request, year, month, *args, **kwargs):
+		print(year, month)
+		current_user = User.objects.get(username=self.request.user)
 		income_form = IncomeForm(year, month, request.POST)
-		plan_form = PlanForm()
+		plan_form = PlanForm(year, month, request.POST)
 		expense_form = ExpenseForm(year, month, request.POST)
 
 		if "income_btn" in request.POST:
-			income_form.save()
+			income = income_form.save(commit=False)
+			income.user = current_user
+			income.save()
 			return HttpResponse("INCOME ADDED")
 		elif "plan_btn" in request.POST:
-			plan_form.save()
+			plan = plan_form.save(commit=False)
+			plan.user = current_user
+			plan.date_plan = datetime.strptime(f"{year}-{month}-01", "%Y-%m-%d").date()
+			plan.save()
 			return HttpResponse("PLAN ADDED")
 		elif "expense_btn" in request.POST:
-			expense_form.save()
+			expense = expense_form.save(commit=False)
+			expense.user = current_user
+			expense.save()
 			return HttpResponse("EXPENSE ADDED")
 		else:
 			return HttpResponse("Nothing")
