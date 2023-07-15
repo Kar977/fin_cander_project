@@ -1,3 +1,4 @@
 from django.contrib import admin
+from .models import PeriodTime, Income, Plan, Expense
 
-# Register your models here.
+admin.site.register([PeriodTime, Income, Plan, Expense])

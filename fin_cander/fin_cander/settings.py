@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "widget_tweaks",
+    "rest_framework",
+    "charts_api.apps.ChartsApiConfig"
 ]
 
 MIDDLEWARE = [
@@ -134,3 +137,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 LOGIN_REDIRECT_URL = "home_site"
+
+LOGIN_URL = "login"
