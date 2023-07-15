@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegisterForm
 
-
+# tez wrzucic do class beased view - trzymac sie jednego standardu - klasowosci
 # Create your views here.
 def register(request):
 	if request.method == "POST":
