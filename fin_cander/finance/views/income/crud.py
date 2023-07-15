@@ -38,7 +38,8 @@ class CreateIncomePlanExecute(View):
 		plan_form = PlanForm(request.POST)
 		expense_form = ExpenseForm(request.POST)
 
-		return render(request, self.template_name, {"income_form": income_form, "plan_form": plan_form, "expense_form": expense_form})
+		return render(request, self.template_name,
+					  {"income_form": income_form, "plan_form": plan_form, "expense_form": expense_form})
 
 	def post(self, request, *args, **kwargs):
 		income_form = IncomeForm(request.POST)
@@ -84,21 +85,30 @@ class CreateIncomePlanExecuteFirstView(LoginRequiredMixin, View):
 		plan_form = PlanForm(year, month, request.POST)
 		expense_form = ExpenseForm(year, month, request.POST)
 
+		return self.process_request(request=request,
+									year=year,
+									month=month,
+									current_user=current_user,
+									income_form=income_form,
+									plan_form=plan_form,
+									expense_form=expense_form)
+
+	def process_request(self, request, year, month, current_user, income_form, plan_form, expense_form):
 		if "income_btn" in request.POST:
 			income = income_form.save(commit=False)
 			income.user = current_user
 			income.save()
-			return HttpResponse("INCOME ADDED")
+			return redirect("budgeting_first_view", year=year, month=month)
 		elif "plan_btn" in request.POST:
 			plan = plan_form.save(commit=False)
 			plan.user = current_user
 			plan.date_plan = datetime.strptime(f"{year}-{month}-01", "%Y-%m-%d").date()
 			plan.save()
-			return HttpResponse("PLAN ADDED")
+			return redirect("budgeting_first_view", year=year, month=month)
 		elif "expense_btn" in request.POST:
 			expense = expense_form.save(commit=False)
 			expense.user = current_user
 			expense.save()
-			return HttpResponse("EXPENSE ADDED")
+			return redirect("budgeting_first_view", year=year, month=month)
 		else:
-			return HttpResponse("Nothing")
+			return HttpResponse("Shouldn't happen. \nReport the problem to the IT department")
