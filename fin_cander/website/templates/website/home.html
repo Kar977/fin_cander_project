@@ -43,13 +43,13 @@
                     </ul>
                 </li>
                 {% if user.is_authenticated %}
-                <li><a href="{% url 'fincander' %}">Budgeting</a></li>
+                <li><a href="{% url 'budgeting_first_view' year=current_year month=current_month %}">Budgeting</a></li>
                 <li><a href='#'>Profile</a></li>
                 <li id="button-link1"><a href="{% url 'logout' %}">Sign Out</a></li>
                 {% else %}
                 <li id="button-link2"><a href="{% url 'login' %}">Sign In</a></li>
                 <li id="button-link3"><a href="{% url 'register' %}">Sign Up</a></li>
-                <li id="button-link4"><a href="{% url 'budgeting_first_view' year=current_year month=current_month %}">DateBudget</a></li>
+                <li id="button-link4"><a href="{% url 'login' %}">Budgeting</a></li>
                 {% endif %}
 
             </ul>

@@ -29,7 +29,7 @@ function getCurrentYearAndMonth(currentUrl){
 }
 
 window.onload = async () => {
-    var chart = am4core.create("chartdiv", am4charts.PieChart);
+    var chart = am4core.create("chartdiv-plan", am4charts.PieChart);
 
     let currentUrl = window.location.href;
     [year, month] = getCurrentYearAndMonth(currentUrl);
