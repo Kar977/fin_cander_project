@@ -4,60 +4,12 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.views.generic.list import ListView
 from django.views import View
-from finance.models import Income
+from finance.models import PeriodTime, Income, Plan, Expense
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from datetime import datetime
-
-
-# Create your views here.
-def FinanceView(request):
-	return render(request, "finance/base.html")
-
-
-def AddIncome(request):
-	if request.method == "POST":
-		form = IncomeForm(request.POST)
-		if form.is_valid():
-			title_of_income = form.cleaned_data.get('title')
-			messages.success(request, f"Succes of submit clik for {title_of_income}!")
-			return redirect("home_site")
-	else:
-		form = IncomeForm()
-
-	return render(request, "finance/create_income.html", {"form": form})
-
-
-class CreateIncomePlanExecute(View):
-	template_name = "finance/create_income.html"
-
-	def get(self, request, *args, **kwargs):
-
-		income_form = IncomeForm(request.POST)
-		plan_form = PlanForm(request.POST)
-		expense_form = ExpenseForm(request.POST)
-
-		return render(request, self.template_name,
-					  {"income_form": income_form, "plan_form": plan_form, "expense_form": expense_form})
-
-	def post(self, request, *args, **kwargs):
-		income_form = IncomeForm(request.POST)
-		plan_form = PlanForm(request.POST)
-		expense_form = ExpenseForm(request.POST)
-
-		if "income_btn" in request.POST:
-			if income_form.is_valid():
-				income_form.save()
-			return HttpResponse("INCOME ADDED")
-		elif "plan_btn" in request.POST:
-			plan_form.save()
-			return HttpResponse("PLAN ADDED")
-		elif "expense_btn" in request.POST:
-			expense_form.save()
-			return HttpResponse("EXPENSE ADDED")
-		else:
-			return HttpResponse("Nothing")
+from django.db.models import Sum
 
 
 class CreateIncomePlanExecuteFirstView(LoginRequiredMixin, View):
@@ -68,15 +20,48 @@ class CreateIncomePlanExecuteFirstView(LoginRequiredMixin, View):
 		plan_form = PlanForm(current_year=year, current_month=month)
 		expense_form = ExpenseForm(current_year=year, current_month=month)
 
+		user_data = User.objects.get(username=self.request.user)
+
+		try:
+			period_data = PeriodTime.objects.get(year=year, month=month)
+		except PeriodTime.DoesNotExist:
+			period_data = None
+
+		income_data = Income.objects.filter(user=user_data, date_period=period_data)
+		income_total = income_data.aggregate(Sum("amount_income"))["amount_income__sum"]
+		plan_data = Plan.objects.filter(user=user_data, date_period=period_data)
+		plan_total = plan_data.aggregate(Sum("amount_plan"))["amount_plan__sum"]
+		expense_data = Expense.objects.filter(user=user_data, date_period=period_data)
+		expense_total = expense_data.aggregate(Sum("amount_expense"))["amount_expense__sum"]
+
+		# TODO zrobic check czy moze byc taka instrukcja warunkowa
+		if income_total is None:
+			income_total = 0
+		if plan_total is None:
+			plan_total = 0
+		if expense_total is None:
+			expense_total = 0
+
+		final_budget_execution = int(plan_total) - int(expense_total)
+
 		print("Year = ", year)
 		print("Month =", month)
-		# tu musialbym wsadzic logike, żeby poprawnie odczytywalo dane z DB i przekazywalo do context managera i
-		# potem użyć w odpowiednim miejscu w HTML'u
+
+		print("income_data:", income_data)
+
 		return render(request, self.template_name, {"income_form": income_form,
 													"plan_form": plan_form,
 													"expense_form": expense_form,
 													"last_year": year,
-													"last_month": month})
+													"last_month": month,
+													"income_data": income_data,
+													"plan_data":plan_data,
+													"expense_data": expense_data,
+													"income_total": income_total,
+													"plan_total": plan_total,
+													"expense_total": expense_total,
+													"final_budget_execution": final_budget_execution
+													})
 
 	def post(self, request, year, month, *args, **kwargs):
 		print(year, month)

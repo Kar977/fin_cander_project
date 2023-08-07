@@ -1,6 +1,19 @@
 {% extends "finance/base.html" %}
 {% load widget_tweaks %}
+{% load static %}
+
+{% block js %}
+<script src="//cdn.amcharts.com/lib/4/core.js"></script>
+<script src="//cdn.amcharts.com/lib/4/charts.js"></script>
+<script src="//cdn.amcharts.com/lib/4/maps.js"></script>
+
+<script src="{% static "finance/chart.js" %}"></script>
+<script src="{% static "finance/chart_plan.js" %}"></script>
+
+{% endblock %}
+
 {% block content %}
+
 <!-- Top NavBar -->
 <nav id="scanfcode" class="navbar">
     <div class="container-fluid">
@@ -10,6 +23,7 @@
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </button>
             <a id="logo" class="navbar-brand" href="/home">FinCander</a>
+            <a id="logo" class="navbar-brand">{{ last_year }}|{{ last_month }}</a>
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
 
@@ -49,7 +63,7 @@
                 <li id="button-link"><a href="{% url 'logout' %}">Sign Out</a></li>
             </ul>
         </div>
-    </div
+    </div>
 </nav>
 <div class="wrapper">
     <div class="container">
@@ -100,19 +114,19 @@
         <div class="output-container flex-space">
             <div>
                 <p>Total Income</p>
-                <span id="income-value">0</span>
+                <span id="income-value">{{ income_total }}</span>
             </div>
             <div>
                 <p>Total Plan</p>
-                <span id="plan-value">0</span>
+                <span id="plan-value">{{ plan_total }}</span>
             </div>
             <div>
                 <p>Total Expenses</p>
-                <span id="expense-value">0</span>
+                <span id="expense-value">{{ expense_total }}</span>
             </div>
             <div>
                 <p>Execution</p>
-                <span id="execution-value">0</span>
+                <span id="execution-value">{{ final_budget_execution }}</span>
             </div>
 
         </div>
@@ -125,8 +139,19 @@
     <div class="list">
         <h3>Summary Chart</h3>
         <div class="chart-space" id="chart"></div>
+        <div id="chartdiv"></div>
     </div>
 </div>
+
+<div class="wrapper">
+    <!-- Chart Summary 2 -->
+    <div class="list">
+        <h3>Summary Chart</h3>
+        <div class="chart-space" id="chart-plan"></div>
+        <div id="chartdiv-plan"></div>
+    </div>
+</div>
+
 
 
 <div class="wrapper">
@@ -136,10 +161,10 @@
         <div class="history-list">
             <h3>Income List</h3>
             <div class="list-container" id="income-list">
-                Some random text to check overflow-wrap: dsadsdasdfffffffffffffffffffffffffffffffffffffffff
-                fffffffffffffffffffffffffffffffffffffffffffffffff
-                fddddddddddddddddddddddddddddddddddddddddddddddd
-                sssssssssssssssssssssssssssssssssssssssssssssss {{ user.id }}
+                {% for income_obj in income_data %}
+                    <p class="clearfix">{{ forloop.counter }}. {{ income_obj.title_income }} ${{ income_obj.amount_income }}
+                       <span class="right-align-list"> {{ income_obj.date_income }} (Edit/Delete)</span></p>
+                {% endfor %}
             </div>
         </div>
 
@@ -147,14 +172,24 @@
         <div class="history-list">
             <h3>Plan List</h3>
             <div class="list-container" id="plan-list">
-                1. Main salary $1250 2023-06-06<p class="right-align">(Edit/Delete)</p>
+                {% for plan_obj in plan_data %}
+                   <p class="clearfix">{{ forloop.counter }}. {{ plan_obj.category_plan }}  ${{ plan_obj.amount_plan }}
+                       <span class="right-align-list">(Edit/Delete)</span></p>
+                {% endfor %}
+            <!--do usuniecia: 1. Main salary $1250 2023-06-06<p class="right-align-list">(Edit/Delete)</p> -->
+
             </div>
         </div>
 
         <!-- List Expense -->
         <div class="history-list">
             <h3>Expense List</h3>
-            <div class="list-container" id="expense-list"></div>
+            <div class="list-container" id="expense-list">
+                {% for expense_obj in expense_data %}
+                    <p>{{ forloop.counter }}. {{ expense_obj.category_plan }} ${{expense_obj.amount_expense}}
+                        {{expense_obj.date_expense}}</p>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>

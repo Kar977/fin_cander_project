@@ -194,6 +194,14 @@ body {
 .right-align {
   text-align: right;
   }
+ .right-align-list {
+ float: right;
+ }
+.clearfix::after{
+content: "";
+clear: both;
+display: table;
+}
 .sublist-content {
   width: 100%;
   border-left: 0.3em solid #587ef4;
@@ -243,6 +251,7 @@ body {
     grid-template-columns: 1fr;
     gap: 1em;
   }
+
 /* navigation bar */
 #scanfcode
 {
@@ -296,3 +305,13 @@ body {
     height: auto;
 }
 }
+#chartdiv {
+  width: 100%;
+  height: 400px;
+}
+#chartdiv-plan {
+  width: 100%;
+  height: 400px;
+}
+
+
