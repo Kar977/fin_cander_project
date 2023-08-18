@@ -1,7 +1,8 @@
-from django import forms
-from . import models
 import calendar
-from django.contrib.auth.models import  User
+
+from django import forms
+
+from finance import models
 
 CATEGORY_CHOICES = [
 	("", "Select a category"),
