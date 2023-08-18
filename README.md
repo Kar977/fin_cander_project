@@ -44,3 +44,6 @@ Clone the repo
 <kbd>
 <img src="https://github.com/Kar977/fin_cander_project/assets/56365605/7cbb32e6-5a2b-48f7-b3d0-fd46db583065" width="100%" height="50%">
 </kbd>
+
+## Sources
+The project design is inspired by [Budget App With Javascript](https://codingartistweb.com/2022/07/budget-app-with-javascript/)
