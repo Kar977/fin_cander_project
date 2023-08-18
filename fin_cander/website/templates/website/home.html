@@ -44,7 +44,7 @@
                 </li>
                 {% if user.is_authenticated %}
                 <li><a href="{% url 'budgeting_first_view' year=current_year month=current_month %}">Budgeting</a></li>
-                <li><a href='#'>Profile</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li id="button-link1"><a href="{% url 'logout' %}">Sign Out</a></li>
                 {% else %}
                 <li id="button-link2"><a href="{% url 'login' %}">Sign In</a></li>
@@ -59,30 +59,30 @@
 <div class="wrapper">
     <div class="container">
         <div class="responsive-page">
-        <div class="sub-container-home">
-            <!-- Income -->
-            <div class="home-container">
-                <h2><b>Experience a life free of financial stress and transform your relationship to money with this
-                    indispensable FinCander App!</b></h2>
+            <div class="sub-container-home">
+                <!-- Income -->
+                <div class="home-container">
+                    <h2><b>Experience a life free of financial stress and transform your relationship to money with this
+                        indispensable FinCander App!</b></h2>
+                </div>
+
+                <!-- Expense -->
+                <div class="home-container">
+                    <img src="{% static 'images/show_app_2.png' %}" alt="app">
+
+                </div>
+            </div>
+            <div class="home-container-horizontal">
+                <h3><a href="{% url 'register' %}">Start with FinCander!</a></h3>
+
             </div>
 
-            <!-- Expense -->
-            <div class="home-container">
-                <img src="{% static 'images/show_app_2.png' %}" alt="app">
-
+            <div class="home-container-horizontal">
+                <h3><a href="{% url 'login' %}">Log in to FinCander!</a></h3>
             </div>
-        </div>
-        <div class="home-container-horizontal">
-            <h3><a href="{% url 'register' %}">Start with FinCander!</a></h3>
-
-        </div>
-
-        <div class="home-container-horizontal">
-            <h3><a href="{% url 'login' %}">Log in to FinCander!</a></h3>
-        </div>
-        <div class="home-container-banner">
-            <img id="img-logo" src="{% static 'images/main_page_banner.png' %}" alt="banner" class="responsive">
-        </div>
+            <div class="home-container-banner">
+                <img id="img-logo" src="{% static 'images/main_page_banner.png' %}" alt="banner" class="responsive">
+            </div>
             <div>
             </div>
         </div>

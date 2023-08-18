@@ -210,6 +210,17 @@ display: table;
   display: grid;
   grid-template-columns: 3fr 2fr 1fr 1fr;
 }
+.btn {
+  padding: 1px 5px !important;
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: RoyalBlue;
+}
 .product {
   font-weight: 500;
   color: #363d55;
@@ -313,5 +324,8 @@ display: table;
   width: 100%;
   height: 400px;
 }
-
+#chartdiv-expense {
+    width: 100%;
+    height: 400px;
+}
 

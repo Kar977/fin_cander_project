@@ -7,8 +7,8 @@
 <script src="//cdn.amcharts.com/lib/4/charts.js"></script>
 <script src="//cdn.amcharts.com/lib/4/maps.js"></script>
 
-<script src="{% static "finance/chart.js" %}"></script>
-<script src="{% static "finance/chart_plan.js" %}"></script>
+<script src="{% static 'finance/charts.js' %}"></script>
+<script src="{% static 'finance/crud.js' %}"></script>
 
 {% endblock %}
 
@@ -59,7 +59,7 @@
                         <li><a href="#">Further Extension 2</a></li>
                     </ul>
                 </li>
-                <li><a href='#'>Profile</a></li>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
                 <li id="button-link"><a href="{% url 'logout' %}">Sign Out</a></li>
             </ul>
         </div>
@@ -86,14 +86,13 @@
             <form method="POST">
                 {% csrf_token %}
                 <div class="plan-input-container">
-                <h3>Plan</h3>
+                    <h3>Plan</h3>
                     {% render_field plan_form.category_plan class="select-category" %}
                     {% render_field plan_form.amount_plan class="plan-input-container" placeholder="Amount" %}
 
 
-
-                <button class="plan-submit" id="plan-input-button" name="plan_btn">Add Plan</button>
-            </div>
+                    <button class="plan-submit" id="plan-input-button" name="plan_btn">Add Plan</button>
+                </div>
             </form>
 
             <!-- Expense -->
@@ -106,7 +105,7 @@
                     {% render_field expense_form.date_expense class="expense-input-container" placeholder="Date" %}
 
 
-                <button class="submit" id="check-amount" name="expense_btn">Add Expense</button>
+                    <button class="submit" id="check-amount" name="expense_btn">Add Expense</button>
                 </form>
             </div>
         </div>
@@ -144,14 +143,22 @@
 </div>
 
 <div class="wrapper">
-    <!-- Chart Summary 2 -->
+    <!-- Chart Plan -->
     <div class="list">
-        <h3>Summary Chart</h3>
+        <h3>Plan Chart</h3>
         <div class="chart-space" id="chart-plan"></div>
         <div id="chartdiv-plan"></div>
     </div>
 </div>
 
+<div class="wrapper">
+    <!-- Chart Expenses -->
+    <div class="list">
+        <h3>Expense Chart</h3>
+        <div class="chart-space" id="chart-expense"></div>
+        <div id="chartdiv-expense"></div>
+    </div>
+</div>
 
 
 <div class="wrapper">
@@ -162,8 +169,14 @@
             <h3>Income List</h3>
             <div class="list-container" id="income-list">
                 {% for income_obj in income_data %}
-                    <p class="clearfix">{{ forloop.counter }}. {{ income_obj.title_income }} ${{ income_obj.amount_income }}
-                       <span class="right-align-list"> {{ income_obj.date_income }} (Edit/Delete)</span></p>
+                <div id="income-record-{{ income_obj.id }}">
+                    <p class="clearfix">{{ forloop.counter }}. {{ income_obj.title_income }}
+                        ${{ income_obj.amount_income }}
+                        <span class="right-align-list"> {{ income_obj.date_income }}
+                    <button class="btn" onclick="deleteIncomeRecord({{ income_obj.id }})"><i
+                            class="fa fa-trash"></i></button>
+                           </span></p>
+                </div>
                 {% endfor %}
             </div>
         </div>
@@ -173,11 +186,15 @@
             <h3>Plan List</h3>
             <div class="list-container" id="plan-list">
                 {% for plan_obj in plan_data %}
-                   <p class="clearfix">{{ forloop.counter }}. {{ plan_obj.category_plan }}  ${{ plan_obj.amount_plan }}
-                       <span class="right-align-list">(Edit/Delete)</span></p>
+                <div id="plan-record-{{ plan_obj.id }}">
+                    <p class="clearfix">{{ forloop.counter }}. {{ plan_obj.category_plan }} ${{ plan_obj.amount_plan }}
+                        <span class="right-align-list">
+                       <button class="btn" onclick="deletePlanRecord({{ plan_obj.id }})"><i
+                               class="fa fa-trash"></i></button>
+                       </span>
+                    </p>
+                </div>
                 {% endfor %}
-            <!--do usuniecia: 1. Main salary $1250 2023-06-06<p class="right-align-list">(Edit/Delete)</p> -->
-
             </div>
         </div>
 
@@ -186,8 +203,13 @@
             <h3>Expense List</h3>
             <div class="list-container" id="expense-list">
                 {% for expense_obj in expense_data %}
-                    <p>{{ forloop.counter }}. {{ expense_obj.category_plan }} ${{expense_obj.amount_expense}}
-                        {{expense_obj.date_expense}}</p>
+                <div id="expense-record-{{ expense_obj.id }}">
+                    <p class="clearfix">{{ forloop.counter }}. {{ expense_obj.category_plan }}
+                        ${{expense_obj.amount_expense}}
+                        <span class="right-align-list">{{expense_obj.date_expense}}
+                    <button class="btn" onclick="deleteExpenseRecord({{ expense_obj.id }})"><i class="fa fa-trash"></i></button>
+                    </span></p>
+                </div>
                 {% endfor %}
             </div>
         </div>

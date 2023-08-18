@@ -1,0 +1,49 @@
+{% load crispy_forms_tags %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Budget App</title>
+    <link rel="icon" href="{%static 'images/favicon.ico' %}"/>
+    <!-- Font Awesome Icons -->
+    <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap"
+            rel="stylesheet"
+    />
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'users/register.css' %}"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<!-- Top NavBar -->
+<nav id="scanfcode" class="navbar">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" id="toogle-button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#myNavbar">
+                <span class="glyphicon glyphicon-menu-hamburger"></span>
+            </button>
+            <a id="logo" class="navbar-brand" href="/home">FinCander</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+
+            <ul id="link" class="nav navbar-nav navbar-right">
+
+                <li id="button-link"><a href="{% url 'login' %}">Sign In</a></li>
+                <li id="button-link2"><a href="{% url 'register' %}">Sign Up</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="wrapper">
+{% block content %}{% endblock %}
+</div>
+</body>
+</html>
