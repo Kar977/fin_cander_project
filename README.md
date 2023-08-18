@@ -23,7 +23,7 @@
 
 ## Setup
 Clone the repo
-
+```git clone https://github.com/Kar977/fin_cander_project.git```
 
 ## More detailed information about modules
 
