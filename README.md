@@ -49,4 +49,5 @@ Clone the repo
 
 ## Sources
 The project design is inspired by [Budget App With Javascript](https://codingartistweb.com/2022/07/budget-app-with-javascript/) <br></br>
-The charts are implemented from [amCharts](https://www.amcharts.com/demos-v4/donut-chart-v4/)
+The charts are implemented from [amCharts](https://www.amcharts.com/demos-v4/donut-chart-v4/) <br></br>
+Graphic downloaded from [Canva](https://www.canva.com/)
