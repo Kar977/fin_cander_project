@@ -32,6 +32,6 @@ Home View
 <img src="https://github.com/Kar977/fin_cander_project/assets/56365605/98d03d7f-74ea-4460-a834-7b93375014db" width=”50%” height=”50%”>
 
 Budgeting View
-
+<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/81791d8d-3188-473f-93fa-922395e1f42c" width=”50%” height=”50%”>
 
 Interactive charts
