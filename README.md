@@ -4,6 +4,7 @@
 * [Setup](#setup)
 * [More detailed information about modules](#more-detailed-information-about-modules)
 * [Application view](#application-view)
+* [Sources](#sources)
 
 ## General info
 <details>
@@ -46,4 +47,5 @@ Clone the repo
 </kbd>
 
 ## Sources
-The project design is inspired by [Budget App With Javascript](https://codingartistweb.com/2022/07/budget-app-with-javascript/)
+The project design is inspired by [Budget App With Javascript](https://codingartistweb.com/2022/07/budget-app-with-javascript/) <br></br>
+The charts are implemented from [amCharts](https://www.amcharts.com/demos-v4/donut-chart-v4/)
