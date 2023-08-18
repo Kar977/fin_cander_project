@@ -8,7 +8,7 @@
 
 ## General info
 <details>
-<summary>Click here to see general information about <b>FinCander</b></summary> <br></br>
+<summary>Click here to see general information about <b>FinCander</b></summary>
 With this application, the user can plan his expenses and control them.
 The application was made as one pager to encourage the potential user to take care of his financial flows.
 </details>
