@@ -28,8 +28,10 @@ Clone the repo
 ## More detailed information about modules
 
 ## Application view
-** Home View **	
+### <li>Home View</li>
+<kbd>
 <img src="https://github.com/Kar977/fin_cander_project/assets/56365605/98d03d7f-74ea-4460-a834-7b93375014db" width=”50%” height=”50%”>
+</kbd>
 
 
 
