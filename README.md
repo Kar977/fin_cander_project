@@ -28,10 +28,13 @@ Clone the repo
 ## More detailed information about modules
 
 ## Application view
-Home View
+** Home View **	
 <img src="https://github.com/Kar977/fin_cander_project/assets/56365605/98d03d7f-74ea-4460-a834-7b93375014db" width=”50%” height=”50%”>
 
-Budgeting View
+
+
+### Budgeting View
 <img src="https://github.com/Kar977/fin_cander_project/assets/56365605/81791d8d-3188-473f-93fa-922395e1f42c" width=”50%” height=”50%”>
 
-Interactive charts
+### Interactive charts
+<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/7cbb32e6-5a2b-48f7-b3d0-fd46db583065" width="70%" height="50%">
