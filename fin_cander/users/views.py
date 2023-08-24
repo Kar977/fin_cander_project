@@ -18,6 +18,7 @@ class RegisterView(SuccessMessageMixin, CreateView):
     success_url = reverse_lazy("login")
     form_class = UserRegisterForm
     success_message = "Your profile was created successfully"
+    print(success_message)
 
 
 class ProfileView(LoginRequiredMixin, generic.View):
