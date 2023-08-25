@@ -2,7 +2,6 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
-* [More detailed information about modules](#more-detailed-information-about-modules)
 * [Application view](#application-view)
 * [Sources](#sources)
 
@@ -21,13 +20,12 @@ The application was made as one pager to encourage the potential user to take ca
 <li>HTML 5</li>
 <li>CSS 3</li>
 <li>JavaScript</li>
+<li>Django REST Framework</li>
 </ul>
 
 ## Setup
 Clone the repo
 ```git clone https://github.com/Kar977/fin_cander_project.git```
-
-## More detailed information about modules
 
 ## Application view
 ### <li>Home View</li>
