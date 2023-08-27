@@ -164,53 +164,60 @@
 <div class="wrapper">
     <!-- List Container - Flex space for lists -->
     <div class="container flex-space-for-history-list">
-        <!-- List Income -->
-        <div class="history-list">
-            <h3>Income List</h3>
-            <div class="list-container" id="income-list">
-                {% for income_obj in income_data %}
-                <div id="income-record-{{ income_obj.id }}">
-                    <p class="clearfix">{{ forloop.counter }}. {{ income_obj.title_income }}
-                        ${{ income_obj.amount_income }}
-                        <span class="right-align-list"> {{ income_obj.date_income }}
+        <div class="history-container">
+            <div class="sub-container">
+
+                <!-- Income List-->
+
+                <div class="income-input-container">
+                    <h3>Income List</h3>
+
+
+                    {% for income_obj in income_data %}
+                    <div id="income-record-{{ income_obj.id }}">
+                        <p class="clearfix">{{ forloop.counter }}. {{ income_obj.title_income }}
+                            ${{ income_obj.amount_income }}
+                            <span class="right-align-list">
                     <button class="btn" onclick="deleteIncomeRecord({{ income_obj.id }})"><i
                             class="fa fa-trash"></i></button>
                            </span></p>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
+                    </div>
+                    {% endfor %}
 
-        <!-- List Plan -->
-        <div class="history-list">
-            <h3>Plan List</h3>
-            <div class="list-container" id="plan-list">
-                {% for plan_obj in plan_data %}
-                <div id="plan-record-{{ plan_obj.id }}">
-                    <p class="clearfix">{{ forloop.counter }}. {{ plan_obj.category_plan }} ${{ plan_obj.amount_plan }}
-                        <span class="right-align-list">
+
+                </div>
+
+
+                <!-- Plan List-->
+                <div class="plan-input-container">
+                    <h3>Plan List</h3>
+                    {% for plan_obj in plan_data %}
+                    <div id="plan-record-{{ plan_obj.id }}">
+                        <p class="clearfix">{{ forloop.counter }}. {{ plan_obj.category_plan }}
+                            ${{ plan_obj.amount_plan }}
+                            <span class="right-align-list">
                        <button class="btn" onclick="deletePlanRecord({{ plan_obj.id }})"><i
                                class="fa fa-trash"></i></button>
                        </span>
-                    </p>
+                        </p>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
-            </div>
-        </div>
 
-        <!-- List Expense -->
-        <div class="history-list">
-            <h3>Expense List</h3>
-            <div class="list-container" id="expense-list">
-                {% for expense_obj in expense_data %}
-                <div id="expense-record-{{ expense_obj.id }}">
-                    <p class="clearfix">{{ forloop.counter }}. {{ expense_obj.category_plan }}
-                        ${{expense_obj.amount_expense}}
-                        <span class="right-align-list">{{expense_obj.date_expense}}
+                <!-- Expense List-->
+                <div class="expense-input-container">
+                    <h3>Expense List</h3>
+
+                    {% for expense_obj in expense_data %}
+                    <div id="expense-record-{{ expense_obj.id }}">
+                        <p class="clearfix">{{ forloop.counter }}. {{ expense_obj.category_plan }}
+                            ${{ expense_obj.amount_expense }}
+                            <span class="right-align-list">
                     <button class="btn" onclick="deleteExpenseRecord({{ expense_obj.id }})"><i class="fa fa-trash"></i></button>
                     </span></p>
+                    </div>
+                    {% endfor %}
                 </div>
-                {% endfor %}
             </div>
         </div>
     </div>
