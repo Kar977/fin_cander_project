@@ -15,6 +15,8 @@ from finance.views.income.crud import CreateIncomePlanExecuteFirstView
 from users.views import RegisterView, profile
 from website.views import HomeView
 
+import datetime
+
 client = Client()
 
 
@@ -24,7 +26,6 @@ class TestHomeView(TestCase):
 		expected_status_code = 200
 		response = client.get("/home/")
 		actual_status_code = response.status_code
-		print(actual_status_code)
 		self.assertEquals(expected_status_code, actual_status_code)
 
 
@@ -32,7 +33,6 @@ class TestUrls(TestCase):
 
 	def test_home_url_is_resolved(self):
 		url = reverse('home_site')
-		print(url)
 		self.assertEquals(resolve(url).func.view_class, HomeView)
 
 	def test_register_url_is_resolved(self):
@@ -103,3 +103,21 @@ class TestUrls(TestCase):
 
 		url = reverse('delete-expense', args=expense_id)
 		self.assertEquals(resolve(url).func.view_class, DeleteExpense)
+
+
+class TestCurrentDateRedirect(TestCase):
+
+	def test_should_return_valid_year_and_month_href_link(self):
+		current_date = datetime.datetime.now()
+
+		expected_year = current_date.year
+		expected_month = current_date.month
+
+		url = reverse("home_site")
+		response = self.client.get(url)
+
+		received_year = response.context["current_year"]
+		received_month = response.context["current_month"]
+
+		self.assertEquals(expected_year, received_year)
+		self.assertEquals(expected_month, received_month)
