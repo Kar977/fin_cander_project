@@ -37,7 +37,7 @@ Clone the repo
 
 ### <li>Budgeting View</li>
 <kbd>
-<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/aad36c70-89fc-447a-abdf-a52dc5a277ad" width=”50%” height=”50%”>
+<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/b4af4da4-1525-45ad-82d3-386942eea47f" width=”50%” height=”50%”>
 </kbd>
 
 ### <li>Interactive charts</li>
