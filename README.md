@@ -30,7 +30,7 @@ Clone the repo
 ## Application view
 ### <li>Home View</li>
 <kbd>
-<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/98d03d7f-74ea-4460-a834-7b93375014db" width=”50%” height=”50%”>
+<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/9ff55d24-9caf-4f37-b258-219786d30428" width=”50%” height=”50%”>
 </kbd>
 
 
@@ -42,7 +42,7 @@ Clone the repo
 
 ### <li>Interactive charts</li>
 <kbd>
-<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/7cbb32e6-5a2b-48f7-b3d0-fd46db583065" width="100%" height="50%">
+<img src="https://github.com/Kar977/fin_cander_project/assets/56365605/932d62e2-dc34-420e-9486-cb57dc62da9c" width="100%" height="50%">
 </kbd>
 
 ## Sources
