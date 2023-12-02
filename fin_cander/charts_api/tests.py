@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
+from django.utils import timezone
 from rest_framework.test import APITestCase
 
 from finance.models import PeriodTime, Income, Plan, Expense
@@ -11,12 +12,11 @@ class TestCombinedData(APITestCase):
         self.user = User.objects.create_user(
             username="testuser", password="testpassword"
         )
-        self.year = 2023
-        self.month = 8
+        self.year = timezone.now().year
+        self.month = timezone.now().month
 
-        # TODO zmienic tworzenie obiektu na .objects.create(data)
         user_obj = User.objects.get(username="testuser")
-        period_obj = PeriodTime.objects.create(year=2023, month=8)
+        period_obj = PeriodTime.objects.create(year=self.year, month=self.month)
 
         self.amount_income = 100
         self.amount_plan = 105
