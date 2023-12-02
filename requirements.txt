@@ -1,0 +1,12 @@
+Pillow
+bootstrap4
+click
+crispy-bootstrap4
+Django
+django-cors-headers
+django-crispy-forms
+django-widget-tweaks
+djangorestframework
+psycopg2-binary
+pytest
+python-dotenv
