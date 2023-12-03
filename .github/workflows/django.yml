@@ -44,6 +44,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
+    - name: Remove test database
+      run: |
+        cd fin_cander
+        python manage.py test --noinput
     - name: Run migrations
       run: |
         cd fin_cander
