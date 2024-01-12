@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  my-postgres:
+    image: postgres:latest
+    container_name: my-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: fin_cander_db
+      POSTGRES_PASSWORD: peli3315
+    volumes:
+      - ods:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "fin_cander_db", "-U", "postgres"]
+      interval: 20s
+      retries: 3
+      start_period: 15s
+      timeout: 5s
+
+  django-app:
+    build:
+      context: .
+    container_name: my-django-app
+    entrypoint: ./docker-entrypoint.sh
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    depends_on:
+      - my-postgres
+    volumes:
+      - .:/app
+    healthcheck:
+      test: curl --fail http://localhost:8000/home/ || exit 1
+      interval: 20s
+      retries: 3
+      start_period: 20s
+      timeout: 5s
+
+volumes:
+  ods:

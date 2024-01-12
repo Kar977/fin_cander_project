@@ -1,0 +1,58 @@
+apiVersion: apps/v1       #wersja kuberentesa z której chcemy korzystać
+kind: Deployment          #definiowanie pliku który teraz tworzymy. Bedziemy tworzyc pody a wnim co ma się dziać tj. jaki obraz dockera ma sie uruchamiac
+metadata:                 #informacje pomocniczne
+  name: fin-cander-kub
+  labels:
+    app: finc-cander-kub
+    group: db
+spec:                     #specyfikacja poda
+  replicas: 1             #liczba replik ktora chcemy posiadac
+  selector:
+    matchLabels:
+      app: fin-cander-kub    # indicates which Pods (with which labeles) need be handled by this Deployment
+  template:
+    metadata:         # indicates the metadata that will be added to each Pod
+      labels:
+        app: fin-cander-kub
+        group: db
+    spec:             #specyfikacja kontenera w podzie
+      containers:     # defines a running container inside the Pod
+        - name: fin-cander-kub
+          image: docker.io/library/fin_cander-django-app:latest
+          ports:
+            - containerPort: 8000   # which port of the container is exposed to the Pod
+          env:
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fin-cander-secrets
+                  key: SECRET_KEY
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: fin-cander-secrets
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: fin-cander-config
+                  key: POSTGRES_USER
+            - name: POSTGRES_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: fin-cander-config
+                  key: POSTGRES_NAME
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: fin-cander-config
+                  key: POSTGRES_HOST
+            - name: POSTGRES_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: fin-cander-config
+                  key: POSTGRES_PORT
+          resources:
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

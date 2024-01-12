@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fin-cander-config
+data:
+  POSTGRES_USER: "postgres"
+  POSTGRES_NAME: "fin_cander_db"
+  POSTGRES_HOST: "my-postgres"
+  POSTGRES_PORT: "5432"
