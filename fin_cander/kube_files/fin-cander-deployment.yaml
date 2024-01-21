@@ -18,7 +18,8 @@ spec:                     #specyfikacja poda
     spec:             #specyfikacja kontenera w podzie
       containers:     # defines a running container inside the Pod
         - name: fin-cander-kub
-          image: docker.io/library/fin_cander-django-app:latest
+          image: docker.io/library/finc_cander_image_for_kub_8:latest
+          imagePullPolicy: Never
           ports:
             - containerPort: 8000   # which port of the container is exposed to the Pod
           env:
