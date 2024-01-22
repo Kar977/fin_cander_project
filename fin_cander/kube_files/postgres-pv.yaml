@@ -1,7 +1,7 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: postgres-pv-volume  # Sets PV's name
+  name: postgres-pv-volume-v2  # Sets PV's name
   labels:
     type: local  # Sets PV's type to local
 spec:
@@ -11,4 +11,4 @@ spec:
   accessModes:
     - ReadWriteMany
   hostPath:
-    path: "/data/postgres-pv"
+    path: "/data/some-space/postgres-pv"

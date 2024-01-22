@@ -31,9 +31,9 @@ spec:
           ports:
             - containerPort: 5432   # which port of the container is exposed to the Pod
           volumeMounts:
-            - name: postgres-volume-mount
+            - name: postgres-volume-mount-v2
               mountPath: /var/lib/postgresql/data
       volumes:
-        - name: postgres-volume-mount
+        - name: postgres-volume-mount-v2
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: postgres-pv-newclaim-v2

@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-pv-claim  # Sets name of PVC
+  name: postgres-pv-newclaim-v2  # Sets name of PVC
   labels:
     type: local
 spec:
@@ -11,4 +11,4 @@ spec:
   resources:
     requests:
       storage: 5Gi  # Sets volume size
-  volumeName: postgres-pv-volume
+  volumeName: postgres-pv-volume-v2
