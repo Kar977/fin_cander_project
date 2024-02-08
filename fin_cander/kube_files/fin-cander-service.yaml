@@ -6,8 +6,8 @@ metadata:
     group: db
 spec:
   type: ClusterIP
-  selector:             # indicates into which pods ClusterIP provides access
+  selector:
     app: fin-cander-kub
   ports:
-    - port: 8000          # port exposed outside ClusterIP
-      targetPort: 8000    # port exposed by Pod
+    - port: 8000
+      targetPort: 8000
