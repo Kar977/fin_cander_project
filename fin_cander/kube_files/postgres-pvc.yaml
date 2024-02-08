@@ -1,14 +1,14 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-pv-newclaim-v2  # Sets name of PVC
+  name: postgres-pv-newclaim-v2
   labels:
     type: local
 spec:
   storageClassName: manual
   accessModes:
-    - ReadWriteMany  # Sets read and write access
+    - ReadWriteMany
   resources:
     requests:
-      storage: 5Gi  # Sets volume size
+      storage: 5Gi
   volumeName: postgres-pv-volume-v2

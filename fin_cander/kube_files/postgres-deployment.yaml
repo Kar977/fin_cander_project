@@ -6,14 +6,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-container    # indicates which Pods (with which labeles) need be handled by this Deployment
+      app: postgres-container
   template:
-    metadata:         # indicates the metadata that will be added to each Pod
+    metadata:
       labels:
         app: postgres-container
         tier: backend
     spec:
-      containers:     # defines a running container inside the Pod
+      containers:
         - name: postgres-container
           image: postgres:16-alpine
           imagePullPolicy: IfNotPresent
@@ -34,7 +34,7 @@ spec:
                   name: fin-cander-config
                   key: POSTGRES_DB
           ports:
-            - containerPort: 5432   # which port of the container is exposed to the Pod
+            - containerPort: 5432
           volumeMounts:
             - name: postgres-volume-mount-v2
               mountPath: /var/lib/postgresql/data
