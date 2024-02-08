@@ -8,7 +8,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN chmod +x /app/docker-entrypoint.sh
+#RUN chmod +x /app/docker-entrypoint.sh
 
 #ENTRYPOINT ["/bin/sh", "-c"]
 CMD ["/bin/sh", "-c", "python manage.py makemigrations; python manage.py migrate; python manage.py runserver 0.0.0.0:8000"]

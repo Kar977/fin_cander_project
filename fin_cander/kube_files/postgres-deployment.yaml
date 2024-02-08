@@ -15,7 +15,7 @@ spec:
     spec:
       containers:     # defines a running container inside the Pod
         - name: postgres-container
-          image: postgres:latest
+          image: postgres:16-alpine
           imagePullPolicy: IfNotPresent
           env:
             - name: POSTGRES_USER
