@@ -3,8 +3,6 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from rest_framework import status
 
-from django.contrib.auth.models import User
-
 User_get = get_user_model()
 
 

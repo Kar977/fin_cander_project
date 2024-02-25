@@ -1,13 +1,30 @@
 version: "3.9"
 
 services:
+
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    restart: always
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_DB_PASSWORD}
+      - MONGO_INITDB_DATABASE=${MONGO_DB_NAME}
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodata:/data/db
+
+
   my-postgres:
     image: postgres:latest
-    container_name: my-postgres
+    container_name: ${POSTGRES_HOST}
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_DB: fin_cander_db
-      POSTGRES_PASSWORD: peli3315
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ods:/var/lib/postgresql/data
     healthcheck:
@@ -25,6 +42,7 @@ services:
       - "8000:8000"
     depends_on:
       - my-postgres
+      - mongo
     volumes:
       - .:/app
     healthcheck:
@@ -36,3 +54,4 @@ services:
 
 volumes:
   ods:
+  mongodata:

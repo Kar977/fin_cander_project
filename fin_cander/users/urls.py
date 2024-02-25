@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from users.views import RegisterView, ProfileView, profile
+from users.views import RegisterView, profile
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),

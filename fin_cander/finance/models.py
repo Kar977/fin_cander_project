@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 
+
 CATEGORY_CHOICES = (
     ("Debt Payments", "Debt Payments"),
     ("Investing", "Investing"),
@@ -54,7 +55,7 @@ class Plan(models.Model):
     date_period = models.ForeignKey(
         PeriodTime, on_delete=models.CASCADE, default=timezone.now()
     )
-    category_plan = models.CharField(choices=CATEGORY_CHOICES)
+    category_plan = models.CharField(choices=CATEGORY_CHOICES, max_length=100)
     amount_plan = models.FloatField(
         validators=[MinValueValidator(1.0), MaxValueValidator(1000000.0)]
     )
@@ -80,7 +81,7 @@ class Expense(models.Model):
     date_period = models.ForeignKey(
         PeriodTime, on_delete=models.CASCADE, default=timezone.now()
     )
-    category_plan = models.CharField(choices=CATEGORY_CHOICES)
+    category_plan = models.CharField(choices=CATEGORY_CHOICES, max_length=100)
     amount_expense = models.FloatField(
         validators=[MinValueValidator(1.0), MaxValueValidator(1000000.0)]
     )
