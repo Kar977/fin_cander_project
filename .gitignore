@@ -1,2 +1,15 @@
 /fin_cander/.env
+
 __pycache__/
+
+/fin_cander/env/
+/env/
+
+/fin_cander/myenv/
+
+/fin_cander/_data/
+
+**/env/
+
+
+
