@@ -3,6 +3,10 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/fin_cander" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/env" />
+      <excludeFolder url="file://$MODULE_DIR$/fin_cander/_data" />
+      <excludeFolder url="file://$MODULE_DIR$/fin_cander/env/include" />
+      <excludeFolder url="file://$MODULE_DIR$/fin_cander/myenv/include" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
