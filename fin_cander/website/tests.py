@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth import views as auth_views
 from django.test import TestCase, Client
 from django.urls import reverse, resolve
@@ -14,8 +16,6 @@ from charts_api.views import (
 from finance.views.income.crud import CreateIncomePlanExecuteFirstView
 from users.views import RegisterView, profile
 from website.views import HomeView
-
-import datetime
 
 client = Client()
 

@@ -1,16 +1,15 @@
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin, messages
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic.edit import CreateView
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import PasswordChangeForm
 
 from users.forms import UserRegisterForm, ProfileUpdateForm, UserUpdateForm
 from users.models import Profile, User
-
-from django.contrib.auth import update_session_auth_hash
 
 
 class RegisterView(SuccessMessageMixin, CreateView):

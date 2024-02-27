@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -19,18 +20,19 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("SECRET_KEY")
+
+# SECRET_KEY = os.getenv("SECRET_KEY")
+# na sztywno - pbolem z dotenv
+SECRET_KEY = "django-insecure-p%iy-&kv#u6yb$@*te&fs#$h7*oba$4gd389f+3l_+e1c@ovkv"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -81,7 +83,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "fin_cander.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -93,10 +94,19 @@ DATABASES = {
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
         "HOST": os.environ.get("POSTGRES_HOST"),
         "PORT": os.environ.get("POSTGRES_PORT"),
-    }  
+    },
+    "nonrel": {
+        "ENGINE": "djongo",
+        "NAME": os.environ.get('MONGO_DB_NAME'),
+        "CLIENT": {
+            'host': f"mongodb://{os.environ.get('MONGO_DB_USERNAME')}:{os.environ.get('MONGO_DB_PASSWORD')}@"
+                    f"{os.environ.get('MONGO_DB_HOST')}/{os.getenv('MONGO_DB_NAME')}?authSource=admin"
+        },
+        'TEST': {
+            'MIRROR': 'default',
+        },
+    }
 }
-#"USER": os.getenv("POSTGRES_USER"),
-#
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -116,7 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -127,7 +136,6 @@ TIME_ZONE = "Europe/Warsaw"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -147,3 +155,5 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_REDIRECT_URL = "home_site"
 
 LOGIN_URL = "login"
+
+DATABASE_ROUTERS = ['website.utils.db_routers.NonRelRouter', ]

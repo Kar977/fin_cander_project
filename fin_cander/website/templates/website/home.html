@@ -1,3 +1,4 @@
+{% load widget_tweaks %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
@@ -31,6 +32,13 @@
                 <span class="glyphicon glyphicon-menu-hamburger"></span>
             </button>
             <a id="logo" class="navbar-brand" href="/home">FinCander</a>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
 
@@ -84,6 +92,23 @@
                 <img id="img-logo" src="{% static 'images/main_page_banner.png' %}" alt="banner" class="responsive">
             </div>
             <div>
+            </div>
+            <div class="home-container">
+
+
+                <form method="POST">
+                {% csrf_token %}
+                <div class="income-input-container">
+                    <h3>Say YES to WEEKLY financial ADVICE!</h3>
+                    {% render_field email_form.name class="income-input-container" placeholder="Name" %}
+                    {% render_field email_form.email class="income-input-container" placeholder="Email"%}
+                    <button class="submit" id="income-input-button" type="submit" name="email_btn">Subscribe</button>
+                </div>
+            </form>
+
+
+
+
             </div>
         </div>
     </div>

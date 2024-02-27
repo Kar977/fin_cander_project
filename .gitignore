@@ -1,2 +1,6 @@
+/env/
+/fin_cander/_data/
+migrations/**
+**/env/
 /fin_cander/.env
-__pycache__/
+**/__pycache__/
