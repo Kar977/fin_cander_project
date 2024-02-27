@@ -99,7 +99,8 @@ DATABASES = {
         "ENGINE": "djongo",
         "NAME": os.environ.get('MONGO_DB_NAME'),
         "CLIENT": {
-            'host': 'mongodb://root:root@mongo/admin?authSource=admin'
+            'host': f"mongodb://{os.environ.get('MONGO_DB_USERNAME')}:{os.environ.get('MONGO_DB_PASSWORD')}@"
+                    f"{os.environ.get('MONGO_DB_HOST')}/{os.getenv('MONGO_DB_NAME')}?authSource=admin"
         },
         'TEST': {
             'MIRROR': 'default',
