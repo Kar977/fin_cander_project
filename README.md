@@ -21,6 +21,8 @@ The application was made as one pager to encourage the potential user to take ca
 <li>CSS 3</li>
 <li>JavaScript</li>
 <li>Django REST Framework</li>
+<li>MongoDB</li>
+<li>Kubernetes</li>
 </ul>
 
 ## Setup
