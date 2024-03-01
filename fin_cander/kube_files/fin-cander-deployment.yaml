@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: fin-cander-kub
   labels:
-    app: finc-cander-kub
+    app: fin-cander-kub
     group: db
 spec:
   replicas: 1
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: fin-cander-kub
-          image: docker.io/library/finc_cander_image_for_kub_11:latest
+          image: docker.io/library/fin-1:latest
           imagePullPolicy: Never
           ports:
             - containerPort: 8000

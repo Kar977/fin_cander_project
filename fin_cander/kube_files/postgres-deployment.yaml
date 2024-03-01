@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-container
+      app: postgres-deployment
   template:
     metadata:
       labels:
-        app: postgres-container
+        app: postgres-deployment
         tier: backend
     spec:
       containers:
