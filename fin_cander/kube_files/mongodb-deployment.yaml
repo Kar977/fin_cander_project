@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb-container
+  template:
+    metadata:
+      labels:
+        app: mongodb-container
+        tier: backend
+    spec:
+      containers:
+        - name: mongodb-container
+          image: mongo:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: MONGO_DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-configmap
+                  key: MONGO_DB_HOST
+            - name: MONGO_DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-configmap
+                  key: MONGO_DB_PORT
+            - name: MONGO_DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-configmap
+                  key: MONGO_DB_NAME
+            - name: MONGO_DB_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-configmap
+                  key: MONGO_DB_USERNAME
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-configmap
+                  key: MONGODB_URI
+            - name: MONGO_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: MONGO_DB_PASSWORD
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: mongodb-volume-mount
+              mountPath: /var/lib/mongodb/data
+      volumes:
+        - name: mongodb-volume-mount
+          persistentVolumeClaim:
+            claimName: mongodb-pvc

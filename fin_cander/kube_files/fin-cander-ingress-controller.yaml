@@ -7,13 +7,12 @@ metadata:
 spec:
   ingressClassName: "nginx"
   rules:
-    - host: localhost
-      http:
-        paths:
-          - path: /home/
-            pathType: Prefix
-            backend:
-              service:
-                name: fin-cander-kub
-                port:
-                  number: 8000
+  - http:
+      paths:
+      - path: /home
+        pathType: Prefix
+        backend:
+          service:
+            name: fin-cander-kub
+            port:
+              number: 8000
