@@ -19,10 +19,10 @@ The application was made as one pager to encourage the potential user to take ca
 <li>PostgreSQL 15</li>
 <li>HTML 5</li>
 <li>CSS 3</li>
-<li>JavaScript</li>
-<li>Django REST Framework</li>
-<li>MongoDB</li>
-<li>Kubernetes</li>
+<li>JavaScript ES14</li>
+<li>Django REST Framework 13.4.0</li>
+<li>MongoDB 7.0.6</li>
+<li>Kubernetes 1.29.2</li>
 </ul>
 
 ## Setup
