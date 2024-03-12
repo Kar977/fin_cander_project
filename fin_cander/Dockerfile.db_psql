@@ -1,0 +1,5 @@
+FROM postgres:latest
+
+ENV POSTGRES_NAME=fin_cander_db POSTGRES_PASSWORD=peli3315 POSTGRES_DB=fin_cander_db
+
+EXPOSE 5432

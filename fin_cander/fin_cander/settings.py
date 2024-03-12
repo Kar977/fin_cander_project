@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.49.2']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -98,7 +98,7 @@ DATABASES = {
         "NAME": os.environ.get('MONGO_DB_NAME'),
         "CLIENT": {
             'host': f"mongodb://{os.environ.get('MONGO_DB_USERNAME')}:{os.environ.get('MONGO_DB_PASSWORD')}@"
-                    f"{os.environ.get('MONGO_DB_HOST')}/{os.getenv('MONGO_DB_NAME')}?authSource=admin"
+                    f"'{os.environ.get('MONGO_DB_HOST')}'/{os.getenv('MONGO_DB_NAME')}?authSource=admin"
         },
         'TEST': {
             'MIRROR': 'default',
