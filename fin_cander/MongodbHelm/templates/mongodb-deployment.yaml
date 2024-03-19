@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongodb-deployment
+  name: {{ .Values.deployment.name }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: mongodb-container
+      app: {{ .Values.deployment.appName}}
   template:
     metadata:
       labels:
-        app: mongodb-container
+        app: {{ .Values.deployment.appName}}
         tier: backend
     spec:
       containers:
-        - name: mongodb-container
-          image: mongo:latest
-          imagePullPolicy: IfNotPresent
+        - name: {{ .Values.deployment.appName}}
+          image: "{{ .Values.deployment.imageName }}:{{ .Values.deployment.imageTag }}"
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
           env:
             - name: MONGO_DB_HOST
               valueFrom:
@@ -49,11 +49,11 @@ spec:
                   name: mongodb-secrets
                   key: MONGO_DB_PASSWORD
           ports:
-            - containerPort: 27017
+            - containerPort: {{ .Values.deployment.container.containerPort }}
           volumeMounts:
-            - name: mongodb-volume-mount
-              mountPath: /var/lib/mongodb/data
+            - name: {{ .Values.volume.name }}
+              mountPath: {{ .Values.volume.mountPath }}
       volumes:
-        - name: mongodb-volume-mount
+        - name: {{ .Values.volume.name }}
           persistentVolumeClaim:
-            claimName: mongodb-pvc
+            claimName: {{ .Values.pvc.name }}

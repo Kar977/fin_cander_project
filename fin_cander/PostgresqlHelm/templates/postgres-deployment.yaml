@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: postgres-deployment
+  name: {{ .Values.deployment.appName }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicaCount }}
   selector:
     matchLabels:
-      app: postgres-deployment
+      app: {{ .Values.deployment.appName }}
   template:
     metadata:
       labels:
-        app: postgres-deployment
+        app: {{ .Values.deployment.appName }}
         tier: backend
     spec:
       containers:
-        - name: postgres-container
-          image: postgres:16-alpine
-          imagePullPolicy: IfNotPresent
+        - name: {{ .Values.deployment.container.name }}
+          image: {{ .Values.deployment.container.image }}
+          imagePullPolicy: {{ .Values.deployment.container.pullPolicy }}
           env:
             - name: POSTGRES_USER
               valueFrom:
@@ -34,11 +34,11 @@ spec:
                   name: fin-cander-config
                   key: POSTGRES_DB
           ports:
-            - containerPort: 5432
+            - containerPort: {{ .Values.deployment.container.containerPort }}
           volumeMounts:
-            - name: postgres-volume-mount-v2
-              mountPath: /var/lib/postgresql/data
+            - name: {{ .Values.deployment.container.volumeName }}
+              mountPath: {{ .Values.deployment.container.volumePath }}
       volumes:
-        - name: postgres-volume-mount-v2
+        - name: {{ .Values.deployment.volume.volumeName }}
           persistentVolumeClaim:
-            claimName: postgres-pv-newclaim-v2
+            claimName: {{ .Values.pvcClaim.claimName }}

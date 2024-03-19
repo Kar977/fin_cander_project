@@ -1,0 +1,14 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ .Values.pvc.name }}
+  labels:
+    type: {{ .Values.pv.labelType }}
+spec:
+  storageClassName: {{ .Values.pv.storageClassName}}
+  accessModes:
+    - {{ .Values.pv.accessMode }}
+  resources:
+    requests:
+      storage: {{ .Values.pv.storage }}
+  volumeName: {{ .Values.pv.name }}

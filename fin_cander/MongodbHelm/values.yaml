@@ -1,0 +1,35 @@
+
+
+
+
+deployment:
+  name: mongodb-deployment
+  replicas: 1
+  appName: mongodb-container
+  imageName: mongo
+  imageTag: latest
+  pullPolicy: IfNotPresent
+
+  container:
+    containerPort: 27017
+
+volume:
+  name: mongodb-volume-mount
+  mountPath: /var/lib/mongodb/data
+
+service:
+  name: mongodb-service
+  protocol: TCP
+  port: 27017
+  targetPort: 27017
+
+pv:
+  name: mongodb-pv
+  labelType: local
+  storageClassName: manual
+  accessMode: ReadWriteMany
+  hostPath: /data/some-space/mongodb-pv
+  storage: 5Gi
+
+pvc:
+  name: mongodb-pvc

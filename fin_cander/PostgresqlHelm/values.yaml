@@ -1,0 +1,36 @@
+
+
+deployment:
+  appName: postgres-deployment
+  replicaCount: 1
+
+  container:
+    name: postgres-container
+    image: postgres:16-alpine
+    pullPolicy: IfNotPresent
+    containerPort: 5432
+    volumeName: postgres-volume-mount-v2
+    volumePath: /var/lib/postgresql/data
+
+  volume:
+    volumeName: postgres-volume-mount-v2
+
+service:
+  name: postgres-service
+  protocol: TCP
+  type: ClusterIP
+  port: 5432
+  targetPort: 5432
+
+
+
+pvcClaim:
+  claimName: postgres-pv-newclaim-v2
+
+pv:
+  name: postgres-pv-volume-v2
+  labelType: local
+  storageClass: manual
+  storage: 5Gi
+  accessMode: ReadWriteMany
+  hostPath: /data/some-space/postgres-pv

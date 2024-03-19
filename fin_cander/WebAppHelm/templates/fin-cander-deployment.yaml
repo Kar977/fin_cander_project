@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: fin-cander-kub
+  name: {{ .Values.deployment.name }}
   labels:
-    app: fin-cander-kub
+    app: {{ .Values.deployment.name }}
     group: db
 spec:
-  replicas: 1
+  replicas: {{ .Values.deployment.replicas }}
   selector:
     matchLabels:
-      app: fin-cander-kub
+      app: {{ .Values.deployment.name }}
   template:
     metadata:
       labels:
-        app: fin-cander-kub
+        app: {{ .Values.deployment.name }}
         group: db
     spec:
       containers:
-        - name: fin-cander-kub
-          image: docker.io/library/fin-1:latest
-          imagePullPolicy: Never
+        - name: {{ .Values.deployment.name }}
+          image: "{{ .Values.deployment.imageName }}:{{ .Values.deployment.imageTag }}"
+          imagePullPolicy: {{ .Values.deployment.pullPolicy }}
           ports:
-            - containerPort: 8000
+            - containerPort: {{ .Values.deployment.containerPort }}
           env:
             - name: SECRET_KEY
               valueFrom:

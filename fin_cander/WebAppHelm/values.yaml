@@ -1,0 +1,11 @@
+deployment:
+  replicas: 1
+  name: fin-cander-kub
+  imageName: docker.io/library/fin-1
+  imageTag: latest
+  pullPolicy: Never
+  containerPort: 8000
+
+ingress:
+  name: ingress-service
+  ingressClass: nginx
